@@ -15,7 +15,7 @@ export default observer(function ActivityDashboard() {
       if(activityRegistry.size <= 1) loadActivities();
     }, [activityRegistry.size, loadActivities]) // added an empty array of dependencies to prevent loops.
 
-    if(activityStore.loadingInitial) return <LoadingComponent content='Loading app' />
+    if(activityStore.loadingInitial) return <LoadingComponent content='Loading activities...' />
     return (
         <Grid>
             <GridColumn width='10'>

@@ -38,13 +38,13 @@ namespace API
         {
             services.AddControllers(opt => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                opt.Filters.Add(new AuthorizeFilter(policy));
+                opt.Filters.Add(new AuthorizeFilter(policy)); // now every single endpoint requires authentication
             })
                 .AddFluentValidation(config => {
                 config.RegisterValidatorsFromAssemblyContaining<Create>(); 
             });
             services.AddApplicationServices(_config); //calling all needed services from applicationServiceExtensions class
-            services.AddIdentityServices(_config);
+            services.AddIdentityServices(_config); //adding Identity services
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,7 +64,7 @@ namespace API
 
             app.UseCors("CorsPolicy");
 
-            app.UseAuthentication();
+            app.UseAuthentication(); //Try to follow this order, because it will fail if the order is different.
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
