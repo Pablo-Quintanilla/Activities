@@ -44,7 +44,7 @@ export default class UserStore {
         
     }
 
-    register =async (creds:UserFormValues) => {
+    register = async (creds:UserFormValues) => {
         try {
             const user = await agent.Account.register(creds);
             store.commonStore.setToken(user.token);
@@ -58,5 +58,9 @@ export default class UserStore {
 
     setImage = (image: string) => {
         if(this.user) this.user.image = image;
+    }
+
+    setDisplayName = (name: string) => {
+        if(this.user) this.user.displayName = name;
     }
 }
